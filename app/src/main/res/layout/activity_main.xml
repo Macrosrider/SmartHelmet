@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <TextView
+            android:id="@+id/speed"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:text="0 km/h"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageSwitcher
+            android:id="@+id/left"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_below="@+id/speed"
+            android:layout_weight="1" />
+
+        <ImageSwitcher
+            android:id="@+id/stop"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:layout_below="@+id/speed"
+            android:layout_weight="1" />
+
+        <ImageSwitcher
+            android:id="@+id/right"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/speed"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+</LinearLayout>
