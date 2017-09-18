@@ -4,7 +4,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "shelmet";
 
-    ImageSwitcher switchl;
-    ImageSwitcher switchr;
-    TextView txtArduino;
+    //TextView txtArduino;
     Handler h;
 
     private static final int REQUEST_ENABLE_BT = 1;
@@ -48,27 +52,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-        txtArduino = (TextView) findViewById(R.id.txtArduino);		// для вывода текста, полученного от Arduino
-        switchl = (ImageSwitcher) findViewById(R.id.leftsw);        // створюємо два ImageSwitcher
-        switchl.setFactory(new ViewSwitcher.ViewFactory() {
+        //txtArduino = (TextView) findViewById(R.id.txtArduino);		// для вывода текста, полученного от Arduino
+        final ImageSwitcher leftsw = (ImageSwitcher)findViewById(R.id.left);
+        leftsw.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
-                ImageView myView = new ImageView(getApplicationContext());
-                return myView;
+                ImageView imgl = new ImageView(getApplicationContext());
+                imgl.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                return imgl;
             }
         });
-        switchl.setImageResource(R.drawable.left);                  //Присвоюємо при включенні чорну стрілку
-        switchr = (ImageSwitcher) findViewById(R.id.rightsw);
-        switchr.setFactory(new ViewSwitcher.ViewFactory() {
+        leftsw.setImageResource(R.drawable.left_arrow);
+        final ImageSwitcher stopsw = (ImageSwitcher)findViewById(R.id.stop);
+        stopsw.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
-                ImageView myView = new ImageView(getApplicationContext());
-                return myView;
+                ImageView imgl = new ImageView(getApplicationContext());
+                imgl.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                return imgl;
             }
         });
-        switchr.setImageResource(R.drawable.right);
+        stopsw.setImageResource(R.drawable.stopp);
+        final ImageSwitcher rightsw = (ImageSwitcher)findViewById(R.id.right);
+        rightsw.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imgl = new ImageView(getApplicationContext());
+                imgl.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                return imgl;
+            }
+        });
+        rightsw.setImageResource(R.drawable.right_arrow);
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -81,22 +96,30 @@ public class MainActivity extends AppCompatActivity {
                         if (endOfLineIndex > 0) { 											// если встречаем конец строки,
                             String sbprint = sb.substring(0, endOfLineIndex);				// то извлекаем строку
                             sb.delete(0, sb.length());                                      // и очищаем sb
-                            if(sbprint == "Left"){
-                                switchl.setImageResource(R.drawable.leftg);
-                            }else {
-                                if (sbprint == "Right") {
-                                    switchr.setImageResource(R.drawable.rightg);
-                                } else {
-                                    if (sbprint == "CanselL") {
-                                        switchl.setImageResource(R.drawable.left);
-                                    } else {
-                                        if (sbprint == "CanselR") {
-                                            switchr.setImageResource(R.drawable.right);
+                            if(sbprint.equals("Left")){
+                                leftsw.setImageResource(R.drawable.gleft_arrow);
+                            }else{
+                                if(sbprint.equals("Right")){
+                                    rightsw.setImageResource(R.drawable.gright_arrow);
+                                }else{
+                                    if(sbprint.equals("Stop")){
+                                        stopsw.setImageResource(R.drawable.rstop);
+                                    }else{
+                                        if(sbprint.equals("CanselL")){
+                                            leftsw.setImageResource(R.drawable.left_arrow);
+                                        }else{
+                                            if(sbprint.equals("CanselR")){
+                                                rightsw.setImageResource(R.drawable.right_arrow);
+                                            }else{
+                                                if(sbprint.equals("CanselS")){
+                                                    stopsw.setImageResource(R.drawable.stopp);
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
-                            txtArduino.setText(sbprint); 	        // обновляем TextView
+                            //txtArduino.setText(sbprint); 	        // обновляем TextView
                         }
                         //Log.d(TAG, "...Строка:"+ sb.toString() +  "Байт:" + msg.arg1 + "...");
                         break;
