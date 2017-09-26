@@ -12,26 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import com.larvalabs.svgandroid.SVG;
-import com.larvalabs.svgandroid.SVGParser;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "shelmet";
 
-    //TextView txtArduino;
     Handler h;
 
     private static final int REQUEST_ENABLE_BT = 1;
@@ -39,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private StringBuilder sb = new StringBuilder();
+    TextView time;
+    long date;
 
     private ConnectedThread mConnectedThread;
 
@@ -48,12 +46,22 @@ public class MainActivity extends AppCompatActivity {
     // MAC-адрес Bluetooth модуля
     private static String address = "20:16:11:16:77:70";
 
+
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        time = (TextView) findViewById(R.id.time);
+        date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm");
+        String dateString = sdf.format(date);
+        time.setText(dateString);
+
         //txtArduino = (TextView) findViewById(R.id.txtArduino);		// для вывода текста, полученного от Arduino
+        TextView maps = (TextView) findViewById(R.id.map1);
+        maps.setBackgroundColor(Color.BLACK);
         final ImageSwitcher leftsw = (ImageSwitcher)findViewById(R.id.left);
         leftsw.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
@@ -121,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                             //txtArduino.setText(sbprint); 	        // обновляем TextView
                         }
-                        //Log.d(TAG, "...Строка:"+ sb.toString() +  "Байт:" + msg.arg1 + "...");
                         break;
                 }
             };

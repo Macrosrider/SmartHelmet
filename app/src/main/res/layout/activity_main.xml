@@ -6,20 +6,42 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="horizontal"
         android:layout_gravity="right">
 
         <TextView
-            android:id="@+id/speed"
-            android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
+            android:gravity="center"
+            android:text="25°C"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="12:00"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="0 km/h"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -31,31 +53,62 @@
         <ImageSwitcher
             android:id="@+id/left"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="15dp"
             android:layout_below="@+id/speed"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1" />
 
         <ImageSwitcher
             android:id="@+id/stop"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="15dp"
             android:layout_below="@+id/speed"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1" />
 
         <ImageSwitcher
             android:id="@+id/right"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_weight="1"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/speed"
             android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/map1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Map"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/mapView"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="340dp"></fragment>
     </LinearLayout>
 
 </LinearLayout>
