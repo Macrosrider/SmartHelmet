@@ -106,7 +106,7 @@
 
         <fragment
             android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.MapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="340dp"></fragment>
     </LinearLayout>

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -92,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         rightsw.setImageResource(R.drawable.right_arrow);
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapView);
+        //Log.i("map", Boolean.toString(mapFragment == null));
+        Navigation n = new Navigation();
+        //Log.i("nav", Boolean.toString(n == null));
+
+        mapFragment.getMapAsync(n);
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
