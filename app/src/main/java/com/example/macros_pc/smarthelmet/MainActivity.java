@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         //Log.i("map", Boolean.toString(mapFragment == null));
-        Navigation n = new Navigation();
+        Navigation n = new Navigation(this);
         //Log.i("nav", Boolean.toString(n == null));
 
         mapFragment.getMapAsync(n);
