@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothSocket btSocket = null;
     private StringBuilder sb = new StringBuilder();
     TextView time;
+
     long date;
 
     private ConnectedThread mConnectedThread;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         time = (TextView) findViewById(R.id.time);
+
         date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("h:mm");
         String dateString = sdf.format(date);
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         //Log.i("map", Boolean.toString(mapFragment == null));
-        Navigation n = new Navigation();
+        Navigation n = new Navigation(this);
         //Log.i("nav", Boolean.toString(n == null));
 
         mapFragment.getMapAsync(n);
